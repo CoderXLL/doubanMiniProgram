@@ -17,7 +17,8 @@
   "license": "MIT",
   "dependencies": {
     "@wepy/core": "^2.0.0-alpha.9",
-    "miniprogram-slide-view": "0.0.3"
+    "miniprogram-slide-view": "0.0.3",
+    "wepy-async-function": "^1.4.7"
   },
   "devDependencies": {
     "@wepy/cli": "^2.0.0-alpha.20",

@@ -1,12 +1,5 @@
 <style lang="less">
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-}
+  
 </style>
 
 <script>
@@ -52,16 +45,4 @@ wepy.app({
   }
 });
 </script>
-<config>
-{
-    pages: [
-      'pages/index'
-    ],
-    window: {
-      backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
-    }
-}
-</config>
+<config src="./app.json"></config>

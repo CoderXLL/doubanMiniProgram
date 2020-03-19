@@ -7,10 +7,49 @@
 		"minified": false
 	},
 	"compileType": "miniprogram",
-	"appid": "wx1cd266053e0941ea",
+	"appid": "wxe14508f78c680461",
 	"projectname": "douban-mini-program",
 	"miniprogramRoot": "weapp/",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
-	"condition": {}
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "登录页",
+					"pathName": "pages/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "首页",
+					"pathName": "pages/home/home",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
 }

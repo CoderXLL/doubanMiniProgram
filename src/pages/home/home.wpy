@@ -1,0 +1,148 @@
+<style lang="less">
+  @import '../../assets/css/home.less';
+</style>
+
+<template>
+  <div class="home-container">
+    <div class="header-wrapper">
+      <div class="search-wrapper">
+        <image src="../../assets/imgs/ic_search.png" mode="aspectFill" />
+        搜索
+      </div>
+    </div>
+    <div v-for="movieItem in homeData" class="group">
+      <div class="group-header">
+        <view class="title">{{ movieItem.title }}</view>
+        <view class="more">
+          查看更多
+          <view class="arrow"></view>
+        </view>
+      </div>
+      <scroll-view scroll-x="true" class="collectionView">
+        <div class="cell" v-for="movie in movieItem.movies">
+          <image class="item-icon" :src="movie.images.small" mode="aspectFill" />
+          <div class="item-title">{{ movie.title }}</div>
+          <div v-if="movie.rating.average > 0" class="item-scoreWrapper">
+            <image v-for="item in movie.stars.on" src="../../assets/imgs/rating_star_small_on.png" />
+            <image v-if="movie.stars.half" src="../../assets/imgs/rating_star_small_half.png" />
+            <image v-for="item in movie.stars.off" src="../../assets/imgs/rating_star_small_off.png" />
+            <div class="item-score">{{ movie.rating.average }}</div>
+          </div>
+          <div v-else class="item-noScore">暂无评分</div>
+        </div>
+      </scroll-view>
+    </div>
+  </div>
+</template>
+
+<script>
+  import wepy from '@wepy/core'
+  
+  wepy.page({
+    data: {
+      homeData: [
+        {
+          url: 'v2/movie/in_theaters',
+          title: '影院热映',
+          movies: []
+        },
+        {
+          url: 'v2/movie/new_movies',
+          title: '新片榜',
+          movies: []
+        },
+        {
+          url: 'v2/movie/weekly',
+          title: '口碑榜',
+          movies: []
+        },
+        {
+          url: 'v2/movie/us_box',
+          title: '北美票房榜',
+          movies: []
+        },
+        {
+          url: 'v2/movie/top250',
+          title: 'Top250',
+          movies: []
+        },
+      ]
+    },
+    methods: {},
+    onLoad() {
+      this.loadCity((city) => {
+        this.loadHomeData(0, {city: city})
+      })
+      this.loadHomeData(1)
+      this.loadHomeData(2)
+      this.loadHomeData(3)
+      this.loadHomeData(4)
+    },
+    methods: {
+      loadCity(success) {
+        // 1.首先获取当前经纬度
+        wx.getLocation().then(res => {
+          console.log(res.latitude, res.longitude)
+          // 2.通过百度API使用经纬度获取城市
+          //http://api.map.baidu.com/reverse_geocoding/v3/?ak=您的ak&output=json&coordtype=wgs84ll&location=31.225696563611,121.49884033194
+          wx.request({
+            url: 'https://api.map.baidu.com/reverse_geocoding/v3/',
+            data: {
+              output: 'json',
+              coordtype: 'wgs84ll',
+              location: `${res.latitude},${res.longitude}`,
+              ak: 'MbZCXKm5A2YwoLMypYhtg8SPC7Poojkg'
+            },
+            success: (res) => {
+              console.log(res.data.result.addressComponent.city)
+              success && success(res.data.result.addressComponent.city)
+            },
+            fail: (err) => {
+              console.log(err)
+            }
+          })
+        }).catch(err => {
+          console.log(err)
+        })
+      },
+      loadHomeData(index, params) {
+        // 3.根据城市获取豆瓣首页信息
+        wx.request({
+          url: `https://douban.uieee.com/${this.homeData[index].url}`,
+          data: params,
+          header: {
+            'content-type': 'json'
+          },
+          success: (res) => {
+            console.log(res)
+            let movies = res.data.subjects
+            for (let i = 0; i < movies.length; i++) {
+              let movie = movies[i].subject || movies[i]
+              this.updateMovieStars(movie)
+              this.homeData[index].movies.push(movie)
+            }
+            console.log(this.homeData)
+          },
+          fail: (err) => {
+            console.log(err)
+          }
+        })
+      },
+      updateMovieStars(movie) {
+        let stars = movie.rating.stars
+        movie.stars = {}
+        movie.stars.on = parseInt(stars / 10)
+        movie.stars.half = stars - movie.stars.on * 10 > 0
+        movie.stars.off = 5 - movie.stars.on - movie.stars.half
+      }
+    }
+  })
+</script>
+
+<config>
+{
+  navigationBarTitleText: '首页',
+  navigationBarBackgroundColor: "#42BD55",
+  navigationBarTextStyle: "white"
+}
+</config>
