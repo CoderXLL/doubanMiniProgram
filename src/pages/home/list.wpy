@@ -1,0 +1,47 @@
+<style lang="less">
+  @import '../../assets/css/home/list.less';;
+</style>
+
+<template>
+  <div class="list-container">
+    <div class="cell-wrapper" v-for="movie in movieItem.movies">
+      <div class="cell">
+        <image class="item-icon" :src="movie.images.small" mode="aspectFill" />
+        <div class="item-title">{{ movie.title }}</div>
+        <div v-if="movie.rating.average > 0" class="item-scoreWrapper">
+          <image v-for="item in movie.stars.on" src="../../assets/imgs/rating_star_small_on.png" />
+          <image v-if="movie.stars.half" src="../../assets/imgs/rating_star_small_half.png" />
+          <image v-for="item in movie.stars.off" src="../../assets/imgs/rating_star_small_off.png" />
+          <div class="item-score">{{ movie.rating.average }}</div>
+        </div>
+        <div v-else class="item-noScore">暂无评分</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import wepy from "@wepy/core"
+  wepy.page({
+    methods: {
+      
+    },
+    onLoad(options) {
+      this.movieItem = JSON.parse(options.movieItem)
+      wx.setNavigationBarTitle({
+        title: this.movieItem.title
+      })
+    },
+    data: {
+      movieItem: {}
+    }
+  })
+</script>
+
+<config>
+{
+  navigationBarTitleText: "list页面",
+  navigationBarTextStyle: "black",
+  navigationStyle: "default"
+}
+</config>

@@ -8,9 +8,10 @@
   "subpackages": [
     {
       "root": "pages/home",
-      "name": "首页",
+      "name": "首页模块",
       "pages": [
-        "home"
+        "home",
+        "list"
       ]
     }
   ],

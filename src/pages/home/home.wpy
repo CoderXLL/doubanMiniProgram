@@ -1,5 +1,5 @@
 <style lang="less">
-  @import '../../assets/css/home.less';
+  @import '../../assets/css/home/home.less';
 </style>
 
 <template>
@@ -13,7 +13,7 @@
     <div v-for="movieItem in homeData" class="group">
       <div class="group-header">
         <view class="title">{{ movieItem.title }}</view>
-        <view class="more">
+        <view class="more" :data-movieItem="movieItem" @tap="watchMore">
           查看更多
           <view class="arrow"></view>
         </view>
@@ -79,6 +79,12 @@
       this.loadHomeData(4)
     },
     methods: {
+      watchMore(e) {
+        const movieItem = e.currentTarget.dataset.movieitem
+        wx.navigateTo({
+          url: `list?movieItem=${JSON.stringify(movieItem)}`
+        })
+      },
       loadCity(success) {
         // 1.首先获取当前经纬度
         wx.getLocation().then(res => {
