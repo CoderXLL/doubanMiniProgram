@@ -1,25 +1,55 @@
 {
-  "pages": ["pages/index"],
+  "pages": [
+    "pages/index",
+    "pages/rank/rank",
+    "pages/mine/mine",
+    "pages/home/home",
+    "pages/home/list"
+  ],
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口获取城市参数"
     }
   },
-  "subpackages": [
-    {
-      "root": "pages/home",
-      "name": "首页模块",
-      "pages": [
-        "home",
-        "list"
-      ]
-    }
-  ],
+  // "subpackages": [
+  //   {
+  //     "root": "pages/home",
+  //     "name": "首页模块",
+  //     "pages": [
+  //       "home",
+  //       "list"
+  //     ]
+  //   }
+  // ],
   "window": {
     "navigationStyle": "default",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTitleText": "weChat",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#B9B9B9",
+    "selectedColor": "#42BD55",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "/static/imgs/ic_tab_home_normal.png",
+        "selectedIconPath": "/static/imgs/ic_tab_home_active.png"
+      }, 
+      {
+        "pagePath": "pages/rank/rank",
+        "text": "榜单",
+        "iconPath": "/static/imgs/ic_tab_subject_normal.png",
+        "selectedIconPath": "/static/imgs/ic_tab_subject_active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "/static/imgs/ic_tab_profile_normal.png",
+        "selectedIconPath": "/static/imgs/ic_tab_profile_active.png"
+      }
+    ]
   }
 }

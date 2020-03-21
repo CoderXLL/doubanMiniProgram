@@ -1,0 +1,20 @@
+<template>
+  <div>
+  </div>
+</template>
+
+<script>
+  import wepy from "@wepy/core"
+  wepy.page({
+  })
+</script>
+
+<style lang="less">
+</style>
+<config>
+{
+  navigationBarTitleText: "我的",
+  navigationBarTextStyle: "black",
+  navigationStyle: "default"
+}
+</config>
