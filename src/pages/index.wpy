@@ -66,7 +66,7 @@
       <image src="../assets/imgs/ic_launcher.png" mode="aspectFill" />
     </div>
     <div class="login-area">
-      <div class="wx-login" @tap="wxLogin">微信登录</div>
+      <button class="wx-login" open-type="getUserInfo" bindgetuserinfo="autoAuth">微信登录</button>
       <div class="douban-login" @tap="doubanLogin">已有豆瓣帐号登录</div>
     </div>
     <div class="agree-wrapper">
@@ -85,10 +85,42 @@
     mixins: [testMixin],
 
     data: {
+      userInfo: {}
     },
     methods: {
-      wxLogin() {
-        console.log('使用微信进行登录')
+      autoAuth(e) {
+        // console.log(e)
+        this.getSetting()
+      },
+      getSetting() {
+        wx.getSetting({
+          success: res => {
+             if (res.authSetting["scope.userInfo"]) {
+              // open-type方式使得授权弹窗不用弹出
+              wx.getUserInfo({
+                success: res => {
+                  this.userInfo = res.userInfo
+                  this.login()
+                }
+              })
+             }
+          },
+          fail: err => {
+            console.log(err)
+          }
+        })
+      },
+      login() {
+         wx.login({
+           success: res => {
+             console.log(res)
+             if (res && res.code) {
+               wx.switchTab({
+                url: 'home/home'
+              })
+             }
+           }
+         })
       },
       doubanLogin() {
         console.log('使用豆瓣已有帐号进行登录')
