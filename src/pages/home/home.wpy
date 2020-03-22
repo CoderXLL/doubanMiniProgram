@@ -70,6 +70,7 @@
     },
     methods: {},
     onLoad() {
+      wx.db.showLoading()
       this.loadCity((city) => {
         this.loadHomeData(0, {city: city})
       })
@@ -104,10 +105,12 @@
               success && success(res.data.result.addressComponent.city)
             },
             fail: (err) => {
+              wx.db.hideLoading()
               wx.db.showToast('获取城市失败', false)
             }
           })
         }).catch(err => {
+          wx.db.hideLoading()
           wx.db.showToast('位置授权失败', false)
         })
       },
@@ -127,9 +130,11 @@
               this.updateMovieStars(movie)
               this.homeData[index].movies.push(movie)
             }
+            wx.db.hideLoading()
             wx.db.showToast('请求成功', true)
           },
           fail: (err) => {
+            wx.db.hideLoading()
             wx.db.showToast('请求接口失败', false)
           }
         })
