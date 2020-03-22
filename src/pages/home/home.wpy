@@ -104,11 +104,11 @@
               success && success(res.data.result.addressComponent.city)
             },
             fail: (err) => {
-              console.log(err)
+              wx.db.showToast('获取城市失败', false)
             }
           })
         }).catch(err => {
-          console.log(err)
+          wx.db.showToast('位置授权失败', false)
         })
       },
       loadHomeData(index, params) {
@@ -127,10 +127,10 @@
               this.updateMovieStars(movie)
               this.homeData[index].movies.push(movie)
             }
-            console.log(this.homeData)
+            wx.db.showToast('请求成功', true)
           },
           fail: (err) => {
-            console.log(err)
+            wx.db.showToast('请求接口失败', false)
           }
         })
       },

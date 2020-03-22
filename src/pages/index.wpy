@@ -90,6 +90,7 @@
     methods: {
       autoAuth(e) {
         // console.log(e)
+        wx.db.showLoading()
         this.getSetting()
       },
       getSetting() {
@@ -101,24 +102,33 @@
                 success: res => {
                   this.userInfo = res.userInfo
                   this.login()
+                },
+                fail: err => {
+                  wx.db.showToast('个人信息出错', false)
                 }
               })
              }
           },
           fail: err => {
             console.log(err)
+            wx.db.showToast('配置信息出错', false)
           }
         })
       },
       login() {
          wx.login({
            success: res => {
-             console.log(res)
+             wx.db.hideLoading()
              if (res && res.code) {
                wx.switchTab({
                 url: 'home/home'
               })
+             } else {
+               wx.db.showToast('获取登录码出错', false)
              }
+           },
+           fail: err => {
+             wx.db.showToast('登录出错', false)
            }
          })
       },

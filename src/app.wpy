@@ -26,6 +26,24 @@ wepy.app({
       console.log('app-launch event emitted, the params are:');
       console.log(args);
     });
+    //全局加载框和Toast提示
+    wx.db = {}
+    wx.db.showLoading = () => {
+      wx.showToast({
+        title: '加载中',
+        icon: 'loading'
+      });
+    },
+    wx.db.hideLoading = () => {
+      wx.hideToast(); 
+    },
+    wx.db.showToast = (title, isSuccess, duration = 1500) => {
+      wx.showToast({
+        title: title,
+        duration: duration,
+        icon: isSuccess ? 'success' : 'none'
+      })
+    }
   },
 
   methods: {
