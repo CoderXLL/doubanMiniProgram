@@ -33,9 +33,6 @@
     font-size: 20rpx;
     color: #A6A6A6;
   }
-  &.cell:last-of-type {
-    margin-right: 30rpx;
-  }
 }
 </style>
 
