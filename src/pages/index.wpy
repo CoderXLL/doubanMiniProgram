@@ -62,6 +62,14 @@
 
 <template>
   <div class="login-container">
+    <nav-bar 
+      title="登录"
+      barColor="white"
+      titleColor="black"
+      :isHome="true"
+      :isBack="true"
+    >
+    </nav-bar>
     <div class="image-wrapper">
       <image src="../assets/imgs/ic_launcher.png" mode="aspectFill" />
     </div>
@@ -143,8 +151,8 @@
 </script>
 <config>
 {
-    navigationBarTitleText: '登录',
-    usingComponents: {
-    }
+  usingComponents: {
+    "nav-bar": "../components/nav-bar.wpy"
+  }
 }
 </config>

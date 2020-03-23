@@ -1,0 +1,122 @@
+
+<style lang="less">
+  .nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    .nav-bar {
+      text-align: center;
+      line-height: 44px;
+      position: relative;
+      .btn-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding-left: 13px;
+        image {
+          width: 35rpx;
+          height: 35rpx;
+        }
+        .back {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+</style>
+
+<template>
+  <div>
+    <div :style="{height: navBarHeight + statusBarHeight + 'px'}"></div>
+    <div class="nav-container" :style="{background-color: barColor}">
+      <div class="status-bar" :style="{height: statusBarHeight + 'px'}"></div>
+      <div class="nav-bar" :style="{height: navBarHeight + 'px', color: titleColor}">
+        {{ title }}
+        <div class="btn-wrapper">
+          <image 
+            v-if="isBack" 
+            class="back" 
+            src="../assets/imgs/nav_back.png" 
+            mode="aspectFill" 
+            @tap="onBackBtnClick"
+          />
+          <image 
+            v-if="isHome"
+            class="home" 
+            src="../assets/imgs/nav_home.png" 
+            mode="aspectFill" 
+            @tap="onHomeBtnClick"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import wepy from "@wepy/core"
+  wepy.component({
+    data: {
+      statusBarHeight: 0,
+      navBarHeight: 0
+    },
+    props: {
+      title: {
+        style: String,
+        default: '',
+        required: true
+      },
+      titleColor: {
+        style: String,
+        default: 'black',
+        required: false
+      },
+      barColor: {
+        style: String,
+        default: 'white',
+        required: false
+      },
+      isBack: {
+        style: Boolean,
+        default: false,
+        required: false
+      },
+      isHome: {
+        style: Boolean,
+        default: false,
+        required: false
+      }
+    },
+    methods: {
+      onBackBtnClick() {
+        wx.navigateBack({
+          delta: 1
+        })
+      },
+      onHomeBtnClick() {
+        wx.navigateBack({
+          delta: 999
+        })
+      }
+    },
+    attached() {
+      const systemInfo = wx.getSystemInfoSync()
+      this.statusBarHeight = systemInfo.statusBarHeight
+      if (systemInfo.platform == 'android') {
+        this.navBarHeight = 48
+      } else {
+        this.navBarHeight = 44
+      }
+    }
+  })
+</script>
+
+<config>
+{
+  usingComponents: {}
+}
+</config>

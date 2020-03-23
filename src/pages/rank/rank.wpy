@@ -1,5 +1,11 @@
 <template>
   <div>
+    <nav-bar 
+      title="榜单"
+      barColor="white"
+      titleColor="black"
+    >
+    </nav-bar>
   </div>
 </template>
 
@@ -13,8 +19,8 @@
 </style>
 <config>
 {
-  navigationBarTitleText: "榜单",
-  navigationBarTextStyle: "black",
-  navigationStyle: "default"
+  usingComponents: {
+    "nav-bar": "../../components/nav-bar.wpy"
+  }
 }
 </config>

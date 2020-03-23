@@ -22,7 +22,7 @@
   //   }
   // ],
   "window": {
-    "navigationStyle": "default",
+    "navigationStyle": "custom",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTitleText": "weChat",
