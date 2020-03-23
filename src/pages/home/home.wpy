@@ -43,8 +43,10 @@
 
 <script>
   import wepy from '@wepy/core'
+  import pageMixin from '../../mixins/pageMixin'
   
   wepy.page({
+    mixins: [pageMixin],
     data: {
       homeData: [
         {

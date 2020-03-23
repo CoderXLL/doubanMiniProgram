@@ -59,7 +59,9 @@
 
 <script>
   import wepy from "@wepy/core"
+  import componentMixin from "../mixins/componentMixin"
   wepy.component({
+    mixins: [componentMixin],
     data: {
       statusBarHeight: 0,
       navBarHeight: 0
