@@ -1,5 +1,8 @@
 
 <style lang="less">
+  [v-cloak] {
+    display: none;
+  }
   .nav-container {
     z-index: 99;
     position: fixed;
@@ -23,7 +26,7 @@
           height: 35rpx;
         }
         .back {
-          margin-right: 10px;
+          margin-right: 15px;
         }
       }
     }
@@ -35,7 +38,7 @@
     <div :style="{height: navBarHeight + statusBarHeight + 'px'}"></div>
     <div class="nav-container" :style="{background-color: barColor}">
       <div class="status-bar" :style="{height: statusBarHeight + 'px'}"></div>
-      <div class="nav-bar" :style="{height: navBarHeight + 'px', color: titleColor}">
+      <div v-cloak class="nav-bar" :style="{height: navBarHeight + 'px', color: titleColor}">
         {{ title }}
         <div class="btn-wrapper">
           <image 
