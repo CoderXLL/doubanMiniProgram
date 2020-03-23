@@ -48,6 +48,12 @@
 					"pathName": "pages/home/home",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "书影音档案",
+					"pathName": "pages/mine/mine",
+					"scene": null
 				}
 			]
 		}

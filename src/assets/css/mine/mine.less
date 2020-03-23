@@ -1,0 +1,139 @@
+.mine-container {
+  .mine-arrow {
+    border: 2rpx solid #8F8F8F;
+    border-left: none;
+    border-bottom: none;
+    transform: rotate(45deg);
+    width: 17rpx;
+    height: 17rpx;
+    display: inline-block;
+  }
+  .login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 420rpx;
+    image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .loginBtn {
+      z-index: 99;
+      background-color: white;
+      height: 84rpx;
+      line-height: 84rpx;
+      text-align: center;
+      width: 330rpx;
+      font-weight: 350;
+      border-radius: 42rpx;
+      box-shadow: 5rpx 5rpx 15rpx rgba(0, 0, 0, 0.2);
+    }
+  }
+  .center-area {
+    padding: 0 30rpx;
+    .center-header {
+      height: 90rpx;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .header-title {
+        font-size: 30rpx;
+        font-weight: bold;
+      }
+      .loginToCheck {
+        font-size: 25rpx;
+        color: #9B9B9B;
+        height: 50rpx;
+        line-height: 50rpx;
+      }
+    }
+  }
+  .bottom-line-wrapper {
+    height: 2rpx;
+    width: 100%;
+    .bottom-line {
+      height: 100%;
+      margin-left: 80rpx;
+      background-color: #F5F5F5;
+    }
+  }
+  .mine-cell {
+    height: 130rpx;
+    display: flex;
+    align-items: center;
+    margin-top: 10rpx;
+    // justify-content: space-between;
+    position: relative;
+    .left {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      margin-right: 145rpx;
+      image {
+        width: 60rpx;
+        height: 60rpx;
+        margin-right: 20rpx;
+      }
+      .cell-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 100%;
+        .top {
+          font-size: 26rpx;
+        }
+        .bottom {
+          display: flex;
+          .count {
+            color: #797979;
+            font-size: 40rpx;
+            font-weight: 350;
+            margin-right: 15rpx;
+          }
+          .count-desc {
+            font-size: 25rpx;
+            color: #8C8C8C;
+            padding-top: 12rpx;
+          }
+        }
+      }
+    }
+    .middle {
+      height: 100%;
+      color: #D2D2D2;
+      font-size: 25rpx;
+    }
+    .right {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      .open {
+        background-color: #F5F5F5;
+        font-size: 25rpx;
+        width: 130rpx;
+        text-align: center;
+        height: 50rpx;
+        line-height: 50rpx;
+        border-radius: 8rpx;
+        margin-right: 10rpx;
+      }
+    }
+  }
+  .version {
+    color: #D2D2D2;
+    font-size: 22rpx;
+    font-weight: 350;
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    bottom: 20rpx;
+  }
+}

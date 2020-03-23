@@ -1,22 +1,92 @@
+<style lang="less">
+  @import '../../assets/css/mine/mine.less';
+</style>
+
 <template>
-  <div>
+  <div class="mine-container">
     <nav-bar 
       title="书影音档案"
       barColor="white"
       titleColor="black"
     >
     </nav-bar>
+    <div class="login-wrapper">
+      <image src="../../assets/imgs/bg_mine_login.png" mode="aspectFill" />
+      <div class="loginBtn">登录</div>
+    </div>
+    <div class="center-area">
+      <div class="center-header">
+        <div class="header-title">我的书影音</div>
+        <div class="loginToCheck">
+          登录查看
+          <div class="mine-arrow"></div>
+        </div>
+      </div>
+      <div 
+        class="cell-wrapper"
+        v-for="(item, index) in items"
+      >
+        <div class="mine-cell">
+          <div class="left">
+            <image :src="'../../assets/imgs/' + item.icon" mode="aspectFill" />
+            <div class="cell-info">
+              <div class="top">{{ item.title }}</div>
+              <div class="bottom">
+                <div class="count">{{ item.count }}</div>
+                <div class="count-desc">{{ item.countDesc }}</div>
+              </div>
+            </div>
+          </div>
+          <text class="middle">
+            {{ item.desc }}
+          </text>
+          <div class="right">
+            <div class="open">
+              立即开启
+            </div>
+            <div class="mine-arrow"></div>
+          </div>
+        </div>
+        <div class="bottom-line-wrapper" v-if="index !== items.length - 1">
+          <div class="bottom-line"></div>
+        </div>
+      </div>
+    </div>
+    <div class="version">版本1.6.45</div>
   </div>
 </template>
 
 <script>
   import wepy from "@wepy/core"
   wepy.page({
+    data: {
+      items: [
+        {
+          icon: 'ic_cat_movie.png',
+          title: '观影分析',
+          count: 0,
+          countDesc: '看过',
+          desc: '标记10部影片\n开启观影分析'
+        },
+        {
+          icon: 'ic_cat_book.png',
+          title: '读书分析',
+          count: 0,
+          countDesc: '读过',
+          desc: '标记10本书籍\n开启读书分析'
+        },
+        {
+          icon: 'ic_cat_music.png',
+          title: '音乐分析',
+          count: 0,
+          countDesc: '听过',
+          desc: '标记10首音乐\n开启音乐分析'
+        }
+      ]
+    }
   })
 </script>
 
-<style lang="less">
-</style>
 <config>
 {
   usingComponents: {
