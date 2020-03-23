@@ -25,16 +25,8 @@
         </view>
       </div>
       <scroll-view scroll-x="true" class="collectionView">
-        <div class="cell" v-for="movie in movieItem.movies">
-          <image class="item-icon" :src="movie.images.small" mode="aspectFill" />
-          <div class="item-title">{{ movie.title }}</div>
-          <div v-if="movie.rating.average > 0" class="item-scoreWrapper">
-            <image v-for="item in movie.stars.on" src="../../assets/imgs/rating_star_small_on.png" />
-            <image v-if="movie.stars.half" src="../../assets/imgs/rating_star_small_half.png" />
-            <image v-for="item in movie.stars.off" src="../../assets/imgs/rating_star_small_off.png" />
-            <div class="item-score">{{ movie.rating.average }}</div>
-          </div>
-          <div v-else class="item-noScore">暂无评分</div>
+        <div class="cell-wrapper" v-for="movie in movieItem.movies">
+          <movie-cell :movie="movie"></movie-cell>
         </div>
       </scroll-view>
     </div>
@@ -79,7 +71,7 @@
     methods: {},
     onLoad() {
       this.loadLocalData()
-      this.loadNetworkData()
+      // this.loadNetworkData()
     },
     methods: {
       watchMore(e) {
@@ -141,17 +133,16 @@
             'content-type': 'json'
           },
           success: (res) => {
-            console.log(res)
-            let movies = this.homeData[index].movies
-            movies.splice(0, movies.lenght)
+            let obj = this.homeData[index]
+            obj.movies.splice(0)
             let movieItems = res.data.subjects
             for (let i = 0; i < movieItems.length; i++) {
               let movie = movieItems[i].subject || movieItems[i]
               this.updateMovieStars(movie)
-              movies.push(movie)
+              obj.movies.push(movie)
             }
             //存储本地
-            wx.setStorageSync(this.homeData[index].title, movies);
+            wx.setStorageSync(obj.title, obj.movies);
             wx.db.hideLoading()
             wx.db.showToast('请求成功', true)
           },
@@ -175,7 +166,8 @@
 <config>
 {
   usingComponents: {
-    "nav-bar": "../../components/nav-bar.wpy"
+    "nav-bar": "../../components/nav-bar.wpy",
+    "movie-cell": "../../components/movie-cell.wpy"
   }
 }
 </config>
