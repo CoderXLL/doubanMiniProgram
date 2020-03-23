@@ -78,14 +78,8 @@
     },
     methods: {},
     onLoad() {
-      wx.db.showLoading()
-      this.loadCity((city) => {
-        this.loadHomeData(0, {city: city})
-      })
-      this.loadHomeData(1)
-      this.loadHomeData(2)
-      this.loadHomeData(3)
-      this.loadHomeData(4)
+      this.loadLocalData()
+      this.loadNetworkData()
     },
     methods: {
       watchMore(e) {
@@ -93,6 +87,22 @@
         wx.navigateTo({
           url: `list?movieItem=${JSON.stringify(movieItem)}`
         })
+      },
+      loadLocalData() {
+        for (let i = 0; i < this.homeData.length; i++) {
+          const obj = this.homeData[i]
+          obj.movies = wx.getStorageSync(obj.title) || [];
+        }
+      },
+      loadNetworkData() {
+        wx.db.showLoading()
+        this.loadCity((city) => {
+          this.loadHomeData(0, {city: city})
+        })
+        this.loadHomeData(1)
+        this.loadHomeData(2)
+        this.loadHomeData(3)
+        this.loadHomeData(4)
       },
       loadCity(success) {
         // 1.首先获取当前经纬度
@@ -132,12 +142,16 @@
           },
           success: (res) => {
             console.log(res)
-            let movies = res.data.subjects
-            for (let i = 0; i < movies.length; i++) {
-              let movie = movies[i].subject || movies[i]
+            let movies = this.homeData[index].movies
+            movies.splice(0, movies.lenght)
+            let movieItems = res.data.subjects
+            for (let i = 0; i < movieItems.length; i++) {
+              let movie = movieItems[i].subject || movieItems[i]
               this.updateMovieStars(movie)
-              this.homeData[index].movies.push(movie)
+              movies.push(movie)
             }
+            //存储本地
+            wx.setStorageSync(this.homeData[index].title, movies);
             wx.db.hideLoading()
             wx.db.showToast('请求成功', true)
           },
