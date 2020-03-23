@@ -19,10 +19,10 @@
     <div v-for="movieItem in homeData" class="group">
       <div class="group-header">
         <view class="title">{{ movieItem.title }}</view>
-        <view class="more" :data-movieItem="movieItem" @tap="watchMore">
+        <button class="more" :data-movieItem="movieItem" @tap="watchMore">
           查看更多
           <view class="arrow"></view>
-        </view>
+        </button>
       </div>
       <scroll-view scroll-x="true" class="collectionView">
         <div class="cell-wrapper" v-for="movie in movieItem.movies">
@@ -71,7 +71,7 @@
     methods: {},
     onLoad() {
       this.loadLocalData()
-      // this.loadNetworkData()
+      this.loadNetworkData()
     },
     methods: {
       watchMore(e) {
