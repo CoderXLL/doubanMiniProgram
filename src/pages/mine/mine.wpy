@@ -11,14 +11,31 @@
     >
     </nav-bar>
     <div class="login-wrapper">
-      <image src="../../assets/imgs/bg_mine_login.png" mode="aspectFill" />
-      <div class="loginBtn">登录</div>
+      <image class="login-bgIcon" src="../../assets/imgs/bg_mine_login.png" mode="aspectFill" />
+      <div 
+        v-if="!isLogin" 
+        class="loginBtn" 
+        @tap="onLoginBtnClick"
+      >
+        登录
+      </div>
+      <div v-else class="userInfo-wrapper">
+        <image class="headPoritral" :src="userInfo.avatarUrl" mode="aspectFill" />
+        <div class="nickName">{{ userInfo.nickName }}</div>
+      </div>
+      <div 
+        v-if="isLogin" 
+        class="lognoutBtn"
+        @tap="onLoginoutBtnClick"
+      >
+        退出
+      </div>
     </div>
     <div class="center-area">
       <div class="center-header">
         <div class="header-title">我的书影音</div>
         <div class="loginToCheck">
-          登录查看
+          {{ isLogin ? '全部' : '登录查看' }}
           <div class="mine-arrow"></div>
         </div>
       </div>
@@ -82,7 +99,28 @@
           countDesc: '听过',
           desc: '标记10首音乐\n开启音乐分析'
         }
-      ]
+      ],
+      isLogin: false
+    },
+    onShow() {
+      this.isLogin = wx.getStorageSync(wx.loginStatusKey)
+    },
+    methods: {
+      onLoginBtnClick() {
+        wx.navigateTo({
+          url: '../login/login'
+        });
+      },
+      onLoginoutBtnClick() {
+        this.isLogin = false
+        wx.setStorageSync(wx.loginStatusKey, false);
+        wx.setStorageSync(wx.dbUserInfoKey, {});
+      }
+    },
+    computed: {
+      userInfo() {
+        return wx.getStorageSync(wx.dbUserInfoKey);
+      }
     }
   })
 </script>

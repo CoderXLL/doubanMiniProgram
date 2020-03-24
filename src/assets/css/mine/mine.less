@@ -14,7 +14,7 @@
     justify-content: center;
     position: relative;
     height: 420rpx;
-    image {
+    .login-bgIcon {
       position: absolute;
       top: 0;
       left: 0;
@@ -31,6 +31,39 @@
       font-weight: 350;
       border-radius: 42rpx;
       box-shadow: 5rpx 5rpx 15rpx rgba(0, 0, 0, 0.2);
+    }
+    .userInfo-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      z-index: 99;
+      .headPoritral {
+        width: 130rpx;
+        height: 130rpx;
+        border-radius: 65rpx;
+        border: 4rpx solid white;
+        margin: 0 auto;
+      }
+      .nickName {
+        color: white;
+        font-size: 32rpx;
+        font-weight: bold;
+        margin-top: 15rpx;
+      }
+    }
+    .lognoutBtn {
+      z-index: 99;
+      width: 110rpx;
+      height: 40rpx;
+      line-height: 40rpx;
+      color: white;
+      font-size: 24rpx;
+      text-align: center;
+      border: 2rpx solid white;
+      border-radius: 6rpx;
+      position: absolute;
+      right: 30rpx;
+      bottom: 25rpx;
     }
   }
   .center-area {

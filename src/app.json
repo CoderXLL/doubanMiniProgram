@@ -1,10 +1,10 @@
 {
   "pages": [
-    "pages/login/login",
+    "pages/home/home",
     "pages/rank/rank",
     "pages/mine/mine",
-    "pages/home/home",
-    "pages/home/list"
+    "pages/home/list",
+    "pages/login/login"
   ],
   "permission": {
     "scope.userLocation": {

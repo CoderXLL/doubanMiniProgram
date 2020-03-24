@@ -44,6 +44,8 @@ wepy.app({
         icon: isSuccess ? 'success' : 'none'
       })
     }
+    wx.dbUserInfoKey = 'dbUserInfoKey'
+    wx.loginStatusKey = 'loginStatusKey'
   },
 
   methods: {

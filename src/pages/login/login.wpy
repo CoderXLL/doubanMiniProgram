@@ -70,9 +70,16 @@
            success: res => {
              wx.db.hideLoading()
              if (res && res.code) {
-               wx.switchTab({
-                url: '../home/home'
+              wx.setStorageSync(wx.dbUserInfoKey, this.userInfo);
+              wx.setStorageSync(wx.loginStatusKey, true);
+              wx.navigateBack({
+                delta: 1,
+                fail: err => {
+                  wx.switchTab({
+                  url: '../home/home'
               })
+                }
+              });
              } else {
                wx.db.showToast('获取登录码出错', false)
              }
