@@ -34,7 +34,10 @@
     <div class="center-area">
       <div class="center-header">
         <div class="header-title">我的书影音</div>
-        <div class="loginToCheck">
+        <div 
+          class="loginToCheck"
+          @tap="loginToCheckClick"
+        >
           {{ isLogin ? '全部' : '登录查看' }}
           <div class="mine-arrow"></div>
         </div>
@@ -58,7 +61,11 @@
             {{ item.desc }}
           </text>
           <div class="right">
-            <div class="open">
+            <div 
+              class="open"
+              :data-item="item"
+              @tap="onOpenBtnClick"
+            >
               立即开启
             </div>
             <div class="mine-arrow"></div>
@@ -106,15 +113,33 @@
       this.isLogin = wx.getStorageSync(wx.loginStatusKey)
     },
     methods: {
+      onOpenBtnClick(e) {
+        if (this.isLogin) {
+          let item = e.currentTarget.dataset.item
+          wx.db.showToast(item.title)
+        } else {
+          this.jumpToLoginPage()
+        }
+      },
+      loginToCheckClick() {
+        if (this.isLogin) {
+          wx.db.showToast('查看全部档案')
+        } else {
+          this.jumpToLoginPage()
+        }
+      },
       onLoginBtnClick() {
-        wx.navigateTo({
-          url: '../login/login'
-        });
+        this.jumpToLoginPage()
       },
       onLoginoutBtnClick() {
         this.isLogin = false
         wx.setStorageSync(wx.loginStatusKey, false);
         wx.setStorageSync(wx.dbUserInfoKey, {});
+      },
+      jumpToLoginPage() {
+        wx.navigateTo({
+          url: '../login/login'
+        });
       }
     },
     computed: {
