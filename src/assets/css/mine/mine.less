@@ -133,6 +133,9 @@
     font-weight: 350;
     width: 100%;
     text-align: center;
+    // 这里暂时可以使用fixed布局，但是如果items过多的时候，version会依然固定在底部。这样会造成重叠
+    // 解决办法是使用flex布局，方向设为colume, justify-content设为space-between.
+    // 这样version会被撑到items下的底部
     position: fixed;
     bottom: 20rpx;
   }
