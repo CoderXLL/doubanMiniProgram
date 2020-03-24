@@ -1,1 +1,3 @@
 *.css linguist-language=javaScript 
+*.less linguist-language=javaScript
+*.wpy linguist-language=javaScript
