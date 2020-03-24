@@ -107,10 +107,12 @@
           desc: '标记10首音乐\n开启音乐分析'
         }
       ],
-      isLogin: false
+      isLogin: false,
+      userInfo: {}
     },
     onShow() {
       this.isLogin = wx.getStorageSync(wx.loginStatusKey)
+      this.userInfo = wx.getStorageSync(wx.dbUserInfoKey)
     },
     methods: {
       onOpenBtnClick(e) {
@@ -143,9 +145,9 @@
       }
     },
     computed: {
-      userInfo() {
-        return wx.getStorageSync(wx.dbUserInfoKey);
-      }
+      // userInfo() {
+      //   return wx.getStorageSync(wx.dbUserInfoKey)
+      // }
     }
   })
 </script>

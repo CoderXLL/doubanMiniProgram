@@ -71,7 +71,7 @@
     methods: {},
     onLoad() {
       this.loadLocalData()
-      // this.loadNetworkData()
+      this.loadNetworkData()
     },
     methods: {
       watchMore(e) {
